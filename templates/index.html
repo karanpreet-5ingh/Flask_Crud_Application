@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block body %}
+    
+
+    
+
+
+    <div class ='container'>
+        <h2>Add a Todo</h2>
+        
+        <!-- adding a action with our todo list -->
+        <form action="/"method = "POST">
+            <div class="mb-3">
+
+            <label for="title" class="form-label">Todo Title</label>
+            <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+
+            </div>
+
+            <div class="mb-3">
+
+            <label for="desc" class="form-label">Todo Description</label>
+            <input type="text" class="form-control" name="desc" id="desc">
+            
+            </div>
+
+
+        
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+    </div>
+
+
+    <div class="container my-3">
+
+        
+                {% if allTodo |length==10 %}
+                <div class="alert alert-primary" role="alert">
+                    NO DATA FOUND!!!!!:(
+                  </div>
+                    
+                    {% else %}
+                    <table class="table">
+                        <thead>
+                         <tr>
+                            <th scope="col">s.no</th>
+                            <th scope="col">title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Actions</th>
+                         </tr>
+                        </thead>
+                        <tbody>
+                    
+                {% for todo  in alltodo %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{todo.title}}</td>
+                    <td>{{todo.desc}}</td>
+                    <td>{{todo.date_created}}</td>
+                    <td>
+                        
+                        <a href="/delete/{{todo.sno}}" type = "button" class="btn btn-outline-dark btn-sn mx-1">Delete</button>
+                        <a href="/update/{{todo.sno}}" type = "button" class="btn btn-outline-dark btn-sn mx-1">Update</button>    
+                    </td> 
+                </tr>
+            
+            
+            </tbody>
+        </table>
+                {% endfor %}
+                {% endif %}
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+{% endblock body %}
